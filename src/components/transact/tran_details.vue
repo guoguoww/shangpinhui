@@ -1,0 +1,356 @@
+<template>
+    <div class="user_main">
+        <mt-header fixed :title="title">
+            <a @click='back' slot="left">
+                <mt-button icon="back"></mt-button>
+            </a>
+        </mt-header>
+
+        <mt-navbar v-model="selected">
+            <mt-tab-item id="1">入场</mt-tab-item>
+            <mt-tab-item id="2">未入场</mt-tab-item>
+            <mt-tab-item id="3">历史</mt-tab-item>
+        </mt-navbar>
+        <mt-tab-container v-model="selected">
+            <mt-tab-container-item id="1">
+                <div class="det_list">
+                    <dl>
+                        <dt>
+                            <label>订单编号</label>
+                            <label>标的名称</label>
+                            <label>手数</label>
+                            <label>方向</label>
+                            <label>开盘价</label>
+                        </dt>
+                        <dd v-for="(i,index) in admission" :key="index">
+                            <label @click="alertNo(i.serialNo)">{{i.serialNo}}</label>
+                            <label @click='alertNo(i.name)'>{{i.name}}</label>
+                            <label>{{i.entriesHands}}</label>
+                            <label>{{i.buyUpDown==0?'涨':'跌'}}</label>
+                            <label>{{i.price}}</label>
+                        </dd>
+                    </dl>
+                </div>
+                <!-- <mt-cell v-for="n in 10" :title="'内容 ' + n" :key="n" /> -->
+            </mt-tab-container-item>
+            <mt-tab-container-item id="2">
+                <div class="det_list">
+                    <dl>
+                        <dt>
+                            <label>订单编号</label>
+                            <label>标的名称</label>
+                            <label>手数</label>
+                            <label>参考价</label>
+                            <label>撤单</label>
+                        </dt>
+                        <dd v-for="(i,index) in no_admission" :key="index">
+                            <label @click="alertNo(i.serialNo)">{{i.serialNo}}</label>
+                            <label @click='alertNo(i.name)'>{{i.name}}</label>
+                            <label>{{i.entriesHands}}</label>
+                            <label>{{i.price}}</label>
+                            <label><mt-button size="small" type="primary" @click="revocation(i.id)">撤单</mt-button></label>
+                        </dd>
+                    </dl>
+                </div>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="3">
+                <div class="det_list">
+                    <dl>
+                        <dt>
+                            <label>订单编号</label>
+                            <label>标的名称</label>
+                            <label>手数</label>
+                            <label>方向</label>
+                            <label>盈亏</label>
+                        </dt>
+                        <dd v-for="(i,index) in historydeal" :key="index">
+                            <label @click="alertNo(i.serialNo)">{{i.serialNo}}</label>
+                            <label @click='alertNo(i.name)'>{{i.name}}</label>
+                            <label>{{i.entriesHands}}</label>
+                            <label>{{i.buyUpDown==0?'涨':'跌'}}</label>
+                            <label>{{i.difMoney}}</label>
+                        </dd>
+                    </dl>
+                </div>
+            </mt-tab-container-item>
+        </mt-tab-container>
+
+    </div>
+</template>
+
+<script type="">
+import { Toast } from "mint-ui";
+
+export default {
+    name: "tran_details",
+    data() {
+        return {
+            title: "持仓明细",
+            selected: "1", //当前navbar选中
+            admission: [
+                //入场明细
+                // {
+                //     serialNo: "c96e9d9517a79241b9ff1b7d1b676f9e", //订单编号
+                //     code: "EC001", //产品编号
+                //     name: "原油", //产品名称
+                //     buyUpDown: "1", //买涨买跌, 0 涨 1 跌
+                //     entriesHands: "1000", //入市手数
+                //     buyPrince: "10.0" //开盘价
+                // },
+                // {
+                //     serialNo: "c96e9d9517a79241b9ff1b7d1b676f9e",
+                //     code: "EC001",
+                //     name: "原油",
+                //     buyUpDown: "1",
+                //     entriesHands: "1000",
+                //     buyPrince: "10.0"
+                // },
+                // {
+                //     serialNo: "c96e9d9517a79241b9ff1b7d1b676f9e",
+                //     code: "EC001",
+                //     name: "原油",
+                //     buyUpDown: "1",
+                //     entriesHands: "1000",
+                //     buyPrince: "10.0"
+                // }
+            ],
+            no_admission: [
+                //未入场明细
+                // {
+                //     serialNo: "c96e9d9517a79241b9ff1b7d1b676f9e", //订单编号
+                //     code: "EC001", //产品编号
+                //     name: "原油", //产品名称
+                //     buyUpDown: "1", //买涨买跌, 0 涨 1 跌
+                //     entriesHands: "1000", //入市手数
+                //     referencePrince: "10.0", //参考价格
+                //     status: 1 //状态: 0 入场 ,1 未入场 ,2 历史
+                // },
+                // {
+                //     serialNo: "c96e9d9517a79241b9ff1b7d1b676f9e",
+                //     code: "EC001",
+                //     name: "原油",
+                //     buyUpDown: "1",
+                //     entriesHands: "1000",
+                //     referencePrince: "10.0",
+                //     status: 1
+                // },
+                // {
+                //     serialNo: "c96e9d9517a79241b9ff1b7d1b676f9e",
+                //     code: "EC001",
+                //     name: "原油",
+                //     buyUpDown: "1",
+                //     entriesHands: "1000",
+                //     referencePrince: "10.0",
+                //     status: 1
+                // }
+            ],
+            historydeal: [
+                //历史明细
+                // {
+                //     serialNo: "c96e9d9517a79241b9ff1b7d1b676f9e",
+                //     code: "EC001",
+                //     name: "原油",
+                //     buyUpDown: "1",//买涨买跌, 0 涨 1 跌
+                //     entriesHands: "1000",
+                //     difMoney: "10.0"//盈亏
+                // },
+                // {
+                //     serialNo: "c96e9d9517a79241b9ff1b7d1b676f9e",
+                //     code: "EC001",
+                //     name: "原油",
+                //     buyUpDown: "1",
+                //     entriesHands: "1000",
+                //     difMoney: "10.0"
+                // }
+            ]
+        };
+    },
+    components: {},
+    created() {
+        this.loading(this.selected);
+    },
+    watch: {
+        selected(val) {
+            this.loading(val);
+        }
+    },
+    methods: {
+        loading(id) {
+            //页面加载触发
+            if (id == 1) {
+                this.$axios({
+                    //入场
+                    url: "/api/trade/admission",
+                    method: "post",
+                    params: {
+                        page: "1",
+                        rows: "100"
+                    }
+                }).then(res => {
+                    if(res.data.errorCode==0){
+                        this.admission=res.data.data.data
+                        this.getdetails(this.admission)
+                    }else{
+                        Toast(res.data.errorMsg)
+                    }
+                }).catch(err => {
+
+                });
+            } else if (id == 2) {
+                this.$axios({
+                    //未入场
+                    url: "/api/trade/no_admission",
+                    method: "post",
+                    params: {
+                        page: "1",
+                        rows: "100"
+                    }
+                }).then(res => {
+                    if(res.data.errorCode==0){
+                        this.no_admission=res.data.data.data
+                        this.getdetails(this.no_admission)
+                    }else{
+                        Toast(res.data.errorMsg)
+                    }
+                }).catch(err => {
+
+                });
+            } else if (id == 3) {
+                //历史
+                this.$axios({
+                    url: "/api/trade/historydeal",
+                    method: "post",
+                    params: {
+                        page: "1",
+                        rows: "100"
+                    }
+                }).then(res => {
+                     if(res.data.errorCode==0){
+                        this.historydeal=res.data.data.data
+                    }else{
+                        Toast(res.data.errorMsg)
+                    }
+                }).catch(err => {
+
+                });
+            }
+        },
+        alertNo(num) {//显示详细
+            Toast(num);
+        },
+        revocation(id){//撤单
+            this.$axios({
+                url:'/api/trade/revocation',
+                method:'post',
+                params:{
+                    id
+                }
+            }).then(res=>{
+                if (res.data.errorCode==0) {
+                    Toast('撤单成功')
+                    this.loading(this.selected)
+                }else{
+                    Toast(res.data.errorMsg)
+                }
+            }).catch(err=>{
+
+            })
+        },
+        getdetails(data){
+            for (let i = 0; i < data.length; i++) {
+                this.$axios({//获取最新行情
+                    url:'/api/market/latest_market',
+                    method:'get',
+                    params:{
+                        codes:data[i].code
+                    }
+                }).then(res=>{
+                    if (res.data.errorCode==0) {
+                        this.$set( data[i],'price',res.data.data[0].price)
+                        //data[i].price=res.data.data[0].price
+                        console.log(data);
+                    }
+                }).catch(err=>{
+
+                })
+            }
+        }
+
+    }
+};
+</script>
+
+<style scoped lang="">
+.det_list {
+    width: 100%;
+    margin-bottom: 200px;
+    background: #ffffff;
+}
+.det_list dl dt {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.det_list dl dt {
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    padding: 0 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top: 1px solid #eee;
+}
+.det_list dl dt label {
+    font-size: 14px;
+    width: 20%;
+    color: #666666;
+    -webkit-box-flex: 1;
+    -webkit-flex: auto;
+    -ms-flex: auto;
+    flex: auto;
+    text-align: center;
+    line-height: inherit;
+}
+.det_list dl dd {
+    height: 45px;
+    line-height: 45px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    background: #ffffff;
+    border-top: 1px solid #eeeeee;
+    position: relative;
+}
+
+.det_list dl dd label {
+    font-size: 14px;
+    color: #333333;
+    width: 20%;
+    text-align: center;
+    line-height: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mint-navbar .mint-tab-item.is-selected {
+    border-bottom: 3px solid #01ccf5;
+    color: #01ccf5;
+    margin-bottom: 0;
+}
+.mint-button--small{
+    line-height: 33px;
+}
+</style>

@@ -1,0 +1,629 @@
+<template>
+    <div class="">
+        <!-- 轮播 -->
+        <!-- <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="(i,index) in images" :key="index">
+                    <img :src="i" alt="">
+                </div>
+                <div class="swiper-slide">
+                    <img src="../../../static/imgs/page1.png" alt="">
+                </div>
+                <div class="swiper-slide">Slide 3</div>
+            </div>
+        </div> -->
+        <swiper :options="swiperOption"  ref="mySwiper">
+			<!-- 这部分放你要渲染的那些内容 -->
+			<swiper-slide v-for="(i,index) in images" :key="index" v-if="images[0]">
+                <img :src="i" alt="">
+			</swiper-slide>
+            <!-- <swiper-slide >
+                <img src="../../../static/imgs/page1.png" alt="">
+			</swiper-slide> -->
+
+			<!-- 这是轮播的小圆点 -->
+			<div class="swiper-pagination" slot="pagination"></div>
+		</swiper>
+        <!-- navbar -->
+        <mt-navbar v-model="selected">
+            <mt-tab-item :id="index" v-for="(i,index) in products" :key="index">{{i.name}}</mt-tab-item>
+        </mt-navbar>
+        <mt-tab-container v-model="selected">
+            <mt-tab-container-item :id="selected">
+                <div tappable="" class="i_datacontent i_rise" style="transition: none;" >
+                    <div class="i_left"  :style="{'color':downcolor}">
+                            <span>{{details.price}}
+                                <i class="iconfont i_fh" v-if="down==false"></i>
+                                <i class="iconfont i_fh" v-else-if="down"></i>
+                                <!-- <i class="iconfont i_fh" v-else>--</i> -->
+                            </span>
+                        <div class="new_ahei" >
+                            <label>{{details.diff}}</label>&nbsp;&nbsp;
+                            <label>{{(details.diffRate*100).toFixed(2)}}%</label>
+                        </div>
+                        <div>
+                            <label id="isClose" style="color:#999999"></label>
+                        </div>
+                    </div>
+                    <div class="i_right">
+                        <p>
+                            <span>最高：
+                                <label>{{details.high}}</label>
+                            </span>
+                            <span>今开：
+                                <label>{{details.open}}</label>
+                            </span>
+                        </p>
+                        <p>
+                            <span>最低：
+                                <label>{{details.low}}</label>
+                            </span>
+                            <span>昨收：
+                                <label>{{details.close}}</label>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <!-- <mt-cell v-for="n in 10" :title="'内容 ' + n" :key="n" /> -->
+            </mt-tab-container-item>
+            <!-- <mt-tab-container-item id="2">
+                <mt-cell v-for="n in 4" :title="'测试 ' + n" :key="n" />
+            </mt-tab-container-item>
+            <mt-tab-container-item id="3">
+                <mt-cell v-for="n in 6" :title="'选项 ' + n" :key="n" />
+            </mt-tab-container-item> -->
+        </mt-tab-container>
+        <!-- banner -->
+        <div class="banner">
+            <img :src="middleimg">
+        </div>
+        <div class="i_opinion">
+
+            <div class="i_contentlist" id="expert">
+
+                <!-- <div class="i_contentlist" tappable="">
+                    <div class="i_contentbox">
+                        <a>
+                            <div class="i_top">
+                                <div>
+                                    <img src="http://fdfs.hnhhysy.com/group1/M00/00/04/dP-IKVszH3GAJV7CAAGS8GzyW2c311.jpg">
+                                </div>
+
+                            </div>
+                            <div class="i_rights">
+                                <div class="i_opinion_title"></div>
+                                <p>关于德意商品通部分系统升级通知</p>
+                                <span>2018-06-27</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="i_contentlist" tappable="">
+                    <div class="i_contentbox">
+                        <a>
+                            <div class="i_top">
+                                <div>
+                                    <img src="http://fdfs.hnhhysy.com/group1/M00/00/04/dP-IKVsyAnqAFXOyAAC1mULSnfo893.jpg">
+                                </div>
+
+                            </div>
+                            <div class="i_rights">
+                                <div class="i_opinion_title"></div>
+                                <p>磨了再磨，才会见底—6.26股市短评</p>
+                                <span>2018-06-26</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="i_contentlist" tappable="">
+                    <div class="i_contentbox">
+                        <a>
+                            <div class="i_top">
+                                <div>
+                                    <img src="http://fdfs.hnhhysy.com/group1/M00/00/04/dP-IKVsx_DuAIPFkAAF8xRnSK-s885.jpg">
+                                </div>
+
+                            </div>
+                            <div class="i_rights">
+                                <div class="i_opinion_title"></div>
+                                <p>解读央行降准政策，7000亿资金正在释放！</p>
+                                <span>2018-06-26</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="i_contentlist" tappable="">
+                    <div class="i_contentbox">
+                        <a>
+                            <div class="i_top">
+                                <div>
+                                    <img src="http://fdfs.hnhhysy.com/group1/M00/00/04/dP-IKVsx-kuAJxjXAAAb_NtToeM747.jpg">
+                                </div>
+
+                            </div>
+                            <div class="i_rights">
+                                <div class="i_opinion_title"></div>
+                                <p>场外期权必将带给衍生品市场一个美好的未来</p>
+                                <span>2018-06-26</span>
+                            </div>
+                        </a>
+                    </div>
+                </div> -->
+                <div class="i_contentlist" tappable="" v-for="(i,index) in news" :key="index">
+                    <div class="i_contentbox">
+                        <router-link :to="{path:'info_details',query:{id:i.id}}">
+                            <div class="i_top">
+                                <div>
+                                    <img :src="getimg(i.id)">
+                                </div>
+
+                            </div>
+                            <div class="i_rights">
+                                <div class="i_opinion_title"></div>
+                                <p>{{i.head}}</p>
+                                <span>{{i.createTime}}</span>
+                            </div>
+                        </router-link>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</template>
+
+<script type="">
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { Indicator } from "mint-ui";
+
+export default {
+    name: "index",
+    data() {
+        return {
+            selected: 0,//当前navbar选中
+            products: [
+                //产品列表
+                // {
+                //     code: "NFIC1809", //产品编号
+                //     entriesMaxHands: "1000", //入市最大手
+                //     entriesMinHands: "10", //入市最小手
+                //     exemptClosed: "0",
+                //     fees: "10.000000",
+                //     name: "中证IC1809",
+                //     precision: 3,//数据精度
+                //     status: "0",
+                //     unit: "p",
+                //     remark: "1手原油为10桶原油报价" //备注
+                // },
+                // {
+                //     code: "IF1807", //产品编号
+                //     entriesMaxHands: "1000", //入市最大手
+                //     entriesMinHands: "10", //入市最小手
+                //     exemptClosed: "0",
+                //     fees: "10.000000",
+                //     name: "沪深IF1807",
+                //     precision: 3,
+                //     status: "0",
+                //     unit: "p",
+                //     remark: "备注" //备注
+                // },
+                //  {
+                //     code: "IC1807", //产品编号
+                //     entriesMaxHands: "1000", //入市最大手
+                //     entriesMinHands: "10", //入市最小手
+                //     exemptClosed: "0",
+                //     fees: "10.000000",
+                //     name: "中证IC1807",
+                //     precision: 3,
+                //     status: "0",
+                //     unit: "p",
+                //     remark: "备注" //备注
+                // }
+            ],
+            product_item: {
+                //单个产品 当前显示的产品
+                // code: "NFIC1809", //产品编号
+                // entriesMaxHands: "1000", //入市最大手
+                // entriesMinHands: "10", //入市最小手
+                // exemptClosed: "0",
+                // fees: "10.000000",
+                // name: "中证IC1809",
+                // precision: 3,
+                // status: "0",
+                // unit: "p",
+                // remark: "1手原油为10桶原油报价" //备注
+            },
+            details:{//最新行情
+
+            },
+            news: [//资讯列表
+                // {
+                //     id: "121",
+                //     icon: "base64",
+                //     head: "标题",
+                //     createTime: "2018-6-27"
+                // },
+                // {
+                //     id: "121",
+                //     icon: "base64",
+                //     head: "标题",
+                //     createTime: "2018-6-27"
+                // }
+            ],
+            middleimg:'./static/imgs/zb.png',//中间图 ../../../static/imgs/zb.png
+            images:[],//轮播图'../../../static/imgs/page1.png'
+            swiperOption: {//swiper配置
+				//是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
+				notNextTick: true,
+		        pagination: '.swiper-pagination',
+                // slidesPerView: 'auto',
+                observer:true,//修改swiper自己或子元素时，自动初始化swiper
+                observeParents:true,//修改swiper的父元素时，自动初始化swiper
+		        centeredSlides: true,
+		        paginationClickable: true,
+                spaceBetween: 30,
+                onSlideChangeEnd: swiper => {
+                    //这个位置放swiper的回调方法
+                    this.page = swiper.realIndex+1;
+                    this.index = swiper.realIndex;
+                },
+                loop: true,
+                // speed: 600,
+                // autoplay: 4000,
+                observer:true,  
+                onTouchEnd: function() {
+                    swiper.startAutoplay();
+                }
+            },
+            detailstimer:null,//获取行情定时器
+            down:null,//涨跌样式
+            downcolor:'#999',//涨跌颜色
+            isselected:false//navbar是否切换
+        }
+    },
+    computed:{
+        swiper() {
+            return this.$refs.mySwiper.swiper;
+        }
+
+    },
+    components: {
+        swiper,
+		swiperSlide
+    },
+    watch: {
+
+        selected(val){//监测navbar选择
+            this.isselected=true
+            this.product_item=this.products[val]
+            this.getdetails()
+         },
+        'details.diff'(val,old){//监测价格变动
+        // if (this.isselected) {//如果是切换navbar导致价格变化
+        //     this.down=null
+        //     this.downcolor='#999'
+        //     this.isselected=false
+        //     return
+        // }
+            console.log(val,old)
+            if (val>0) {
+                this.down=false
+                this.downcolor='#ff4e00'
+            }else if (val<0) {
+                this.down=true
+                 this.downcolor='#1eba31'
+            }
+            // if (val>old) {
+            //     this.down=false
+            //     this.downcolor='#ff4e00'
+            // }else if(val<old){
+            //     this.down=true
+            //     this.downcolor='#1eba31'
+            // }
+        },
+    },
+    mounted() {
+        // Indicator.open({//loading
+        //     spinnerType: "triple-bounce"
+        // });
+        // Indicator.close();//关闭loading
+
+    },
+    created () {
+        this.loading()
+
+    },
+    beforeDestroy(){
+        console.log(this.detailstimer,'离开')
+        clearInterval(this.detailstimer)
+    },
+    methods: {
+        loading() {//页面加载触发
+            this.$axios.get("/api/home/news/findBySumPage",{//获取资讯
+            params: {
+                page: 1,
+                rows:5
+            }
+        }).then(res => {
+            if (res.data.errorCode==0) {
+                this.news=res.data.data.data
+                // for (let i = 0; i < this.news.length; i++) {
+                //        this.$axios.get("api/home/news/findByIdNewsIcon",{
+                //            params:{
+                //                id:this.news[i].id
+                //            }
+                //        }).then(res=>{
+                //           this.$set(this.news[i],'icon',res.data)
+                //        })
+                        
+                // }
+            }
+        }).catch(err => {
+
+        });
+        this.$axios.get('/api/home/icon',{//获取轮播图
+            params:{
+                sign:0
+            }
+        }).then(res=>{
+            if(res.data.errorCode==0){
+                for (let i = 0; i < res.data.data.data.length; i++) {
+                    this.images.push(res.data.data.data[i].icon)  
+                }
+                console.log(this.images);
+            }else{
+
+            }
+        })
+        this.$axios.get('/api/home/icon',{//获取中间图
+            params:{
+                sign:3
+            }
+        }).then(res=>{
+            if(res.data.errorCode==0){
+               //this.middleimg=res.data.data.data[0].icon
+            }else{
+                
+            }
+        })
+        this.$axios.post('/api/trade/contract_list_query').then(res=>{//获取产品信息
+            if (res.data.errorCode==0) {
+                this.products=res.data.data
+                this.product_item=res.data.data[0]
+                if(this.detailstimer==null){
+                    this.getdetails()
+                }
+                clearInterval(this.detailstimer)
+                this.detailstimer=null
+                this.detailstimer=setInterval(()=>{
+                        this.getdetails()
+                },3*1000)
+                
+                
+            }
+        }).catch(err=>{
+
+        })
+        },
+        getdetails(){//获取最新行情
+            //Indicator.close();
+            this.$axios.get('/api/market/latest_market',{//获取最新行情
+                params:{
+                    codes:this.product_item.code
+                }
+            }).then(res=>{  
+                this.details=res.data.data[0]
+            }).catch(err=>{
+
+            })
+        },
+      getimg(id){//获取图片
+        return 'http://'+location.host+process.env.BASEURL+'/api/home/news/icon/'+id
+      }
+    }
+};
+</script>
+
+<style scoped lang="">
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+.swiper-slide img {
+    /* 轮播图片 */
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+.mint-navbar .mint-tab-item.is-selected {
+    /* navbar选中样式 */
+    color: #00baff;
+    border-bottom: 3px solid #00baff;
+    margin-bottom: 0;
+}
+
+.i_datacontent {
+    width: 100%;
+    padding: 1% 0;
+    background: #fff;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.i_datacontent .i_left {
+    -webkit-box-flex: 2;
+    -webkit-flex: 2;
+    -ms-flex: 2;
+    flex: 2;
+    border-right: 1px solid #eee;
+    color: #ff4e00;
+}
+/* .i_datacontent .up{
+    color: #ff4e00;
+} */
+.i_datacontent .down{
+    color: #1eba31;
+}
+
+.i_rise .i_right span label {
+    color: #ff4e00;
+}
+.i_datacontent .i_left span {
+    display: block;
+    /* color: #1eba31; */
+    font-size: 23px;
+    text-align: center;
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+}
+.i_datacontent .new_ahei {
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.i_datacontent .i_left label {
+    font-size: 13px;
+    /* color: #1eba31; */
+    margin: 0 3%;
+    display: inline-block;
+}
+
+.i_datacontent .i_right {
+    -webkit-box-flex: 3;
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+}
+.i_datacontent .i_right > p:first-child {
+    height: 32px;
+    line-height: 32px;
+}
+
+.i_datacontent .i_right p {
+    text-align: left;
+    padding-left: 5%;
+    height: 20px;
+    line-height: 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.i_datacontent .i_right span {
+    font-size: 13px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    color: #333;
+}
+/* banner */
+.banner {
+    background: #fff;
+    font-size: 14px;
+    color: #999;
+    margin: 0 auto 0;
+}
+.banner img {
+    width: 100%;
+    display: block;
+}
+/* 资讯 */
+.i_opinion {
+    width: 100%;
+    background: #fff;
+    margin: 0 auto 0;
+}
+.i_contentlist {
+    border-left: none;
+    border-right: none;
+}
+.i_contentbox:last-child {
+    border-bottom: none;
+}
+.i_contentbox a {
+    padding: 3% 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+.i_contentbox .i_top {
+    -webkit-box-flex: 2;
+    -webkit-flex: 2;
+    -ms-flex: 2;
+    flex: 2;
+    text-align: center;
+    margin-top: 10px;
+}
+.i_top div {
+    width: 60px;
+    height: 40px;
+    margin: 0 auto 5px;
+    text-align: center;
+    overflow: hidden;
+}
+.i_top div img {
+    width: 60px;
+    height: 40px;
+    display: inline;
+}
+.i_contentbox .i_rights {
+    -webkit-box-flex: 7;
+    -webkit-flex: 7;
+    -ms-flex: 7;
+    flex: 7;
+}
+.i_opinion_title {
+    width: 100%;
+    height: 10px;
+    font-size: 16px;
+    padding: 0 0;
+    line-height: 50px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #333;
+}
+.i_contentbox .i_rights p {
+    width: 98%;
+    font-size: 15px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.i_contentbox .i_rights label,
+.i_contentbox .i_rights span {
+    font-size: 10px;
+    color: #999;
+    float: left;
+    margin-top: 12px;
+}
+</style>

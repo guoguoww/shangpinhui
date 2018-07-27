@@ -1,0 +1,39 @@
+<template>
+  <div :id="id" :class="className" :style="style">
+
+  </div>
+</template>
+
+<script>
+  import * as echarts from 'echarts';
+  export default {
+    props: ['options','id','className','style'],
+    name:'echarts',
+    data: function () {
+      return {
+          myChart:null
+      }
+    },
+    mounted: function(){
+      var myChart = echarts.init(document.getElementById(this.id));
+      myChart.setOption(this.options);
+      this.myChart=myChart
+    },
+    methods: {
+      update(data){
+        this.myChart.setOption({
+                series: [{
+                    data: data
+                }]
+            });
+      },
+      clear(){
+        this.myChart.clear()
+      }
+    }
+  }
+</script>
+
+<style rel="stylesheet/scss" scoped>
+
+</style>

@@ -1,0 +1,579 @@
+<template>
+  <div class="">
+      <ul class="a_tranmenu">
+            <li><a>总资产：<b>0.00</b>元</a></li>
+            <li><a>可用：<b>0.00</b>元</a></li>
+        </ul>
+    <mt-navbar v-model="selected">
+        <mt-tab-item id="1">选项一</mt-tab-item>
+        <mt-tab-item id="2">选项二</mt-tab-item>
+        <mt-tab-item id="3">选项三</mt-tab-item>
+    </mt-navbar>
+    <mt-tab-container v-model="selected">
+        <mt-tab-container-item id="1">
+          <div class="i_datacontent swiper-wrapper">
+
+                <div class="i_datacontent i_rise" ng-reflect-ng-class="i_datacontent i_rise">
+                    <div class="i_left">
+                        <span>502.2
+                            <i class="iconfont i_fh"></i>
+                        </span>
+                        <div class="new_ahei">
+                            <label>7.6</label>&nbsp;&nbsp;
+                            <label>1.54%</label>
+                        </div>
+                        <div>
+                            <label id="isClose" style="color:#999999"></label>
+                        </div>
+                    </div>
+                    <div class="i_right">
+                        <p>
+                            <span>最高：<label>510.0</label></span>
+                            <span>今开：<label>498.0</label></span>
+                        </p>
+                        <p>
+                            <span>最低：<label>497.6</label></span>
+                            <span>昨收：<label>494.8</label></span>
+                        </p>
+                    </div>
+                </div>
+          </div>
+          <div class="tran_box">
+            <div class="tran_span_box">
+
+                <!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object"
+}--><span style="margin-left: 15px"  class="select_bar" ng-reflect-ng-class="select_bar">
+                    分时线
+                </span><span style="margin-left: 15px"  ng-reflect-ng-class="" class="">
+                     30 m 
+                </span><span style="margin-left: 15px"  ng-reflect-ng-class="" class="">
+                     60 m 
+                </span><span style="margin-left: 15px"  ng-reflect-ng-class="" class="">
+                     日 
+                </span>
+
+            </div>
+            <div class="myechart" _echarts_instance_="ec_1530493988951" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative;"><div style="position: relative; overflow: hidden; width: 375px; height: 260px; padding: 0px; margin: 0px; border-width: 0px;"><canvas data-zr-dom-id="zr_0" width="750" height="520" style="position: absolute; left: 0px; top: 0px; width: 375px; height: 260px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;"></canvas></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div style="display: none;"></div><div></div></div>
+        </div>
+        <div style="background-color: white">
+            <h6 style="font-size: 14px;margin-top: 0px;margin-bottom: 3px;padding-top:15px;color: #333333; text-align: center">
+                请选择交易时间</h6>
+            <div class="index__principal-list___1ruOr" style=" padding-left: 10px;padding-bottom: 1px;padding-top: 10px;">
+                        <!--bindings={
+  "ng-reflect-ng-for-of": ""
+}--><span  class="index__principal-item___2ECJi index__principal-active___light">
+                            上午盘(9-11:30)
+                        </span><span  class="index__principal-item___2ECJi">
+                            下午盘(13:30-15)
+                        </span><span  class="index__principal-item___2ECJi">
+                            晚盘(9-10)
+                        </span><span  class="index__principal-item___2ECJi">
+                            晚盘(10-11)
+                        </span><span  class="index__principal-item___2ECJi">
+                            晚盘(11点-0点)
+                        </span><span  class="index__principal-item___2ECJi">
+                            晚盘(0点-1点)
+                        </span><span  class="index__principal-item___2ECJi">
+                            晚盘(1点-2:30)
+                        </span><span  class="index__principal-item___2ECJi">
+                            次日上午盘
+                        </span>
+            </div>
+        </div>
+        <div class="buy_cz_box buy_font_color">
+            
+            <div class="buy_one">
+                <div class="buy_one">
+                    <span class="productName">
+                        <label>
+                             <b>最新价：501.8元/桶</b>
+                        </label>
+                        <label>
+                             <b>冻结权利金：259.77</b>
+                        </label>
+                    </span>
+                    <input type="hidden" value="2">
+                </div>
+            </div>
+
+            <div class="div_money">
+                <div class="flex-container">
+                    <div class="flex-item_two">
+                        备注：1手原油为10桶原油报价
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="orderNum border_buttom">
+                <div class="flex-container" style="padding-top: 5px;">
+                    <div class="flex-item_one">
+                        <label class="label_title">入市手数</label>
+                    </div>
+                    <div class="flex-item_three">
+                        <button class="sum_button sum_button_left"  type="button">
+                            －
+                        </button>
+                        <input class="input_sum ng-untouched ng-pristine ng-valid" min="1" type="number" ng-reflect-model="10">
+                        <button class="sum_button sum_button_right"  type="button">
+                            ＋
+                        </button>
+                    </div>
+                </div>
+
+                <div class="index__principal-list___1ruOr" style=" padding-left: 10px;padding-bottom: 1px;padding-top: 20px;">
+                        <span style="width: 31%"  class="index__principal-item___2ECJi">
+                            1000 手
+                        </span>
+                        <span style="width: 31%"  class="index__principal-item___2ECJi">
+                            100 手
+                        </span>
+                        <span style="width: 31%"  class="index__principal-item___2ECJi">
+                            10 手
+                        </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tran_quota tran_btn">
+
+            <a >买涨</a>
+            <a >买跌</a>
+
+        </div>
+        <div class="buy_explain" style="font-size: 9px;">
+            <span>温馨提示：(入市有风险，操盘须谨慎)</span>
+        </div>
+        <ul class="tran_msg">
+
+            <li >
+                <router-link to="/tran_details">
+                    <label>持仓盈亏</label>
+                    <i class="iconfont"></i>
+                    <span>交易明细</span>
+                </router-link>
+            </li>
+
+        </ul>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="2">
+            <mt-cell v-for="n in 4" :title="'测试 ' + n" :key="n" />
+        </mt-tab-container-item>
+        <mt-tab-container-item id="3">
+            <mt-cell v-for="n in 6" :title="'选项 ' + n" :key="n" />
+        </mt-tab-container-item>
+    </mt-tab-container>
+
+  </div>
+</template>
+
+<script type="">
+export default {
+  name:"transact",
+  data() {
+    return {
+      selected:"1",
+    }
+  },
+  components: {
+
+  },
+  methods: {
+    
+  }
+}
+</script>
+
+<style scoped lang="">
+.a_tranmenu {
+    width: 100%;
+    height: 50px;
+    background: #00BAFF;
+}
+.a_tranmenu li {
+    width: 50%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    float: left;
+    position: relative;
+}
+.a_tranmenu li:first-child::before {
+    content: '';
+    width: 1px;
+    height: 40%;
+    background: #FFFFFF;
+    position: absolute;
+    top: 30%;
+    right: 0;
+}
+.a_tranmenu li a {
+    font-size: 14px;
+    padding: 0 2px;
+    color: #FFFFFF;
+    border-bottom: 0px solid #FFFFFF;
+}
+.a_tranmenu li a b {
+    font-weight: normal;
+    padding: 0 3px;
+}
+
+.mint-navbar .mint-tab-item.is-selected{
+  border-bottom: 3px solid #00baff;
+    color: #00baff;
+    margin-bottom: 0;
+}
+.mint-navbar .mint-tab-item {
+    padding: 12px 0;
+    font-size: 15px;
+}
+.i_datacontent {
+    width: 100%;
+    padding: 2% 0;
+    background: #FFFFFF;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    border-bottom: 1px solid #EEEEEE;
+    height: 6rem;
+}
+.i_datacontent .i_left {
+    -webkit-box-flex: 2;
+    -webkit-flex: 2;
+    -ms-flex: 2;
+    flex: 2;
+    border-right: 1px solid #EEEEEE;
+}
+
+
+.i_datacontent .i_left span {
+    display: block;
+    color: #1eba31;
+    font-size: 23px;
+    /* margin-bottom: 2%; */
+    text-align: center;
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+}
+.i_rise .i_left span, .i_rise .i_left label, .i_rise .i_right span label {
+    color: #ff4e00;
+}
+i.i_fh {
+    font-size: 20px;
+}
+.i_datacontent .new_ahei {
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.i_datacontent .i_right {
+    -webkit-box-flex: 3;
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+}
+.i_datacontent .i_right > p:first-child {
+    height: 32px;
+    line-height: 32px;
+}
+
+.i_datacontent .i_right p {
+    text-align: left;
+    padding-left: 5%;
+    height: 20px;
+    line-height: 20px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    /* padding: 2% 0; */
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.i_datacontent .i_right span {
+    font-size: 13px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    color: #333333;
+}
+.tran_span_box {
+    width: 100%;
+    clear: both;
+    padding: 8px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.tran_span_box span.select_bar {
+    color: #00baff;
+    border: 1px solid #00baff;
+}
+.tran_span_box span {
+    padding: 5px;
+    border-radius: 5px;
+    color: #333333;
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 6px;
+    border: 1px solid #EEEEEE;
+}
+.index__principal-list___1ruOr {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-align-content: space-between;
+    -ms-flex-line-pack: justify;
+    align-content: space-between;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+}
+.index__principal-active___light {
+    background: lightgray;
+    color: black;
+    border: 1px solid #949494;
+}
+
+.index__principal-item___2ECJi {
+    width: 48%;
+    margin-right: 2%;
+    background: white;
+    color: black;
+    border: 1px solid #949494;
+    text-align: center;
+    font-size: 12px;
+    line-height: 15px;
+    border-radius: 5px;
+    padding: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin-bottom: 10px;
+}
+
+.buy_cz_box {
+    border-top: 1px solid #EEEEEE;
+    background: #FFFFFF;
+    border-bottom: 1px solid #EEEEEE;
+}
+.buy_one {
+    padding: 3px 0%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /* border-bottom: 1px solid #EEEEEE; */
+}
+.buy_one span {
+    font-size: 13px;
+    display: block;
+}
+
+.productName {
+    font-size: 18px !important;
+}
+.buy_one span label, .buy_one label, .div_money label {
+    color: #ff4e00;
+}
+.buy_one span label b, .buy_one label b {
+    font-size: 13px;
+    font-weight: normal;
+}
+.div_money {
+    padding-left: 6% !important;
+    font-size: 15px;
+}
+.flex-container {
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    width: 100%;
+}
+.flex-item_two {
+    -webkit-flex: 1;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: 13px;
+    padding-bottom: 6px;
+}
+.orderNum {
+    padding: 0px 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-bottom: 10px;
+}
+
+.border_buttom {
+    border-bottom: 1px solid #EEEEEE;
+}
+.flex-item_one {
+    width: 110px;
+}
+.label_title {
+    font-size: 15px;
+    padding-left: 7%;
+    color: black !important;
+    line-height: 34px;
+}
+.flex-item_three {
+    -webkit-flex: 3;
+    -webkit-box-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    line-height: 34px;
+}
+.sum_button_left {
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+}
+.sum_button_right {
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.sum_button {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    text-align: center;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    vertical-align: middle;
+    background: white;
+}
+.input_sum {
+    width: 90px;
+    height: 36px;
+    font-size: 14px;
+    text-align: center;
+    margin-left: -3px;
+    margin-right: -3px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    vertical-align: bottom;
+}
+input, button, textarea {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    border-radius: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+    border: 1px solid #A9A9A9;
+    outline: none;
+    font-size: 14px;
+    line-height: normal;
+}
+
+
+
+.tran_quota {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 8px;
+    padding: 0 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #FFFFFF;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+}
+.tran_btn {
+    height: 70px;
+    display: block;
+    text-align: center;
+}
+.tran_btn button:first-child, .tran_btn a:first-child {
+    background: #00baff;
+}
+.tran_btn button, .tran_btn a {
+    width: 48%;
+    height: 42px;
+    line-height: 40px;
+    margin-top: 16px;
+    display: inline-block;
+    border: none;
+    color: #FFFFFF;
+    font-size: 14px;
+    border-radius: 4px;
+    background: #00baff;
+}
+.buy_explain {
+    width: 100%;
+    padding: 8px 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 1px;
+    padding-bottom: 8px;
+    background: #FFFFFF;
+}
+.buy_explain span, .buy_explain p {
+    font-size: 13px;
+    color: #999999;
+    line-height: 170%;
+}
+.tran_msg {
+    margin-top: 8px;
+    background: #FFFFFF;
+}
+.tran_msg li {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #EEEEEE;
+}
+.tran_msg li a {
+    font-size: 14px;
+    display: block;
+}
+.tran_msg li a label {
+    color: #333333;
+}
+.tran_msg li a i {
+    font-size: 14px;
+    float: right;
+    color: #999999;
+}
+.tran_msg li a span {
+    color: #999999;
+    float: right;
+}
+</style>

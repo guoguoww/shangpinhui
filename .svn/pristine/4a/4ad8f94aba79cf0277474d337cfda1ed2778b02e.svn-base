@@ -1,0 +1,214 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import index from "../components/index/index";
+import transact from "../components/transact/transact";
+import tran_details from "../components/transact/tran_details";
+import info from "../components/info/info";
+import info_details from "../components/info/info_details";
+import user from "../components/user/user";
+import user_data from "../components/user/user_data";
+import user_assets from "../components/user/user_assets";
+import user_bankcard from "../components/user/user_bankcard";
+import user_recharge from "../components/user/user_recharge";
+import user_withdraw from "../components/user/user_withdraw";
+import user_changepwd from "../components/user/user_changepwd";
+import recharge_details from "../components/user/recharge_details";
+import add_bankcard from "../components/user/add_bankcard";
+import login from "../components/login/login";
+import register from "../components/login/register";
+import forget from "../components/login/forget";
+
+
+
+
+
+Vue.use(Router)
+
+let routes = [{
+    path: '/',
+    component: index,
+    name: 'index',
+    meta: {
+      shownav: true,
+      auth: true
+    }
+  },
+  {
+    path: '/transact',
+    component: transact,
+    name: 'transact',
+    meta: {
+      shownav: true,
+      auth: true
+    }
+  },
+  {
+    path: '/tran_details',
+    component: tran_details,
+    name: 'tran_details',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/info',
+    component: info,
+    name: 'info',
+    meta: {
+      shownav: true,
+      auth: true
+    }
+  },
+  {
+    path: '/info_details',
+    component: info_details,
+    name: 'info_details',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/user',
+    component: user,
+    name: 'user',
+    meta: {
+      shownav: true,
+      auth: true
+    }
+  },
+  {
+    path: '/user_data',
+    component: user_data,
+    name: 'user_data',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/user_assets',
+    component: user_assets,
+    name: 'user_assets',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/user_bankcard',
+    component: user_bankcard,
+    name: 'user_bankcard',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/user_recharge',
+    component: user_recharge,
+    name: 'user_recharge',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/user_withdraw',
+    component: user_withdraw,
+    name: 'user_withdraw',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/user_changepwd',
+    component: user_changepwd,
+    name: 'user_changepwd',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/recharge_details',
+    component: recharge_details,
+    name: 'recharge_details',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/add_bankcard',
+    component: add_bankcard,
+    name: 'add_bankcard',
+    meta: {
+      shownav: false,
+      auth: true
+    }
+  },
+  {
+    path: '/login',
+    component: login,
+    name: 'login',
+    meta: {
+      shownav: false,
+      auth: false
+    }
+  },
+  {
+    path: '/register',
+    component: register,
+    name: 'register',
+    meta: {
+      shownav: false,
+      auth: false
+    }
+  },
+  {
+    path: '/forget',
+    component: forget,
+    name: 'forget',
+    meta: {
+      shownav: false,
+      auth: false
+    }
+  }
+
+]
+const router = new Router({
+  routes
+})
+
+// router.beforeEach((to, from, next) => {
+//   var userInfo = true //router.app.$cookie.get('_auth') //JSON.parse(localStorage.getItem('userInfoStorage'));
+
+
+//   if (to.meta.auth) { //判断需不需要登录验证
+//     if (userInfo) { //有没有用户信息
+//       next()
+//     } else { //没有跳到登录页
+//       next({
+//         path: '/login',
+//         query: {
+//           redirect: to.fullPath
+//         }
+//       })
+//     }
+//   } else if (to.name === 'login') { //判断进入的地址是不是登录页
+//     if (userInfo) { //有没有用户信息 有就返回首页 没有就进
+//       next('/')
+//     } else {
+//       next()
+//     }
+//   } else {
+
+//     next()
+//   }
+
+// })
+
+export default router

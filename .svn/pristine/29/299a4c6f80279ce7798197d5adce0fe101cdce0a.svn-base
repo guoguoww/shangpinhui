@@ -1,0 +1,121 @@
+<template>
+  <div class="user_main">
+    <mt-header fixed :title="title">
+        <a @click='back' slot="left">
+            <mt-button icon="back"></mt-button>
+        </a>
+    </mt-header>
+    <ul class="infor_list sec_number">
+        <li>
+            <input id="phoneNumber" placeholder="请输入手机号" type="text" class="ng-untouched ng-pristine ng-valid">
+        </li>
+
+        <li class="forget_txt">
+            <input id="yzm" placeholder="验证码" type="text" class="ng-untouched ng-pristine ng-valid">
+            <button class="forget_yzm" tappable="">
+                获取验证码
+            </button>
+        </li>
+
+        <li>
+            <input id="pwd" placeholder="新密码" type="password" class="ng-untouched ng-pristine ng-valid">
+        </li>
+
+        <li style="margin-top: 15px" tappable="">
+            <button class="confirm" id="register">确认</button>
+        </li>
+    </ul>
+  </div>
+</template>
+
+<script type="">
+export default {
+  name:"",
+  data() {
+    return {
+        title:'忘记密码'
+    }
+  },
+  components: {
+
+  },
+    beforeCreate () {
+      document.querySelector('html').style.backgroundColor='#fff'
+      document.querySelector('#app').style.backgroundColor='#fff'
+      
+  },
+  destroyed () {
+        document.querySelector('html').style.backgroundColor='#eaeaea'
+      document.querySelector('#app').style.backgroundColor='#eaeaea'
+
+  }
+}
+</script>
+
+<style scoped lang="">
+.sec_number {
+    border-top: 1px solid #eee;
+    margin-top: 8px;
+    padding-top: 15px;
+}
+
+.infor_list {
+    margin-bottom: 8px;
+    background: #fff;
+    display: block;
+}
+.sec_number li {
+    height: 58px;
+    border-bottom: none;
+}
+.infor_list li {
+    padding: 0 2%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #eee;
+    display: block;
+}
+.sec_number li input {
+    width: 96%;
+    margin: 0 auto;
+    display: block;
+    height: 46px;
+    padding: 0 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.infor_list li input {
+    border: 1px solid #eee!important;
+    border-radius: 6px;
+}
+.forget_txt {
+    position: relative;
+}
+.forget_yzm {
+    height: 30px;
+    background: #00baff;
+    border: none;
+    border-radius: 5px;
+    padding: 0 5px;
+    color: #fff;
+    position: absolute;
+    right: 7%;
+    top: 8px;
+    line-height: 30px
+}
+.sec_number li .confirm {
+    width: 96%;
+    margin: 0 auto;
+    display: block;
+    height: 46px;
+    border-radius: 4px;
+    background: #00baff;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+}
+</style>

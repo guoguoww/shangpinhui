@@ -1,0 +1,36 @@
+<template>
+  <div id="app">
+    
+    <router-view/>
+      <foot v-show="$route.meta.shownav"></foot>
+  </div>
+</template>
+
+<script>
+import foot from "./components/foot";
+export default {
+  name: 'App',
+  components: {
+    foot
+  }
+}
+</script>
+
+<style>
+.mint-header{/*标题*/
+    background-color: #ffffff;
+    color: #555;
+}
+.mint-header-title{
+  font-size: 16px;
+}
+.user_main{
+    padding-top: 45px;
+}
+.recharge_details .mint-cell-text {/*我的资产*/
+    vertical-align: middle;
+    display: inline-block;
+    height: 2rem;
+    font-size: 1.3rem;
+}
+</style>

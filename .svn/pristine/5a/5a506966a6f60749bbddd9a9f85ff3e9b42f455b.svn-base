@@ -1,0 +1,302 @@
+<template>
+  <div class="">
+      <!-- 头像 -->
+      <router-link :to="userData.authStatus==2?'/user_data':'/user_realname'" class="user_por" id="aboutMe" >
+
+            <div  style="display: block;">
+                <div class="por">
+                    <div class="jqthumb" style="width: 65px; height: 65px; opacity: 1;">
+                        <div style="width: 100%; height: 100%; border-radius: 50%; background-image: url(&quot;http://www.yuntoub.com:8021/upload/default_header.png&quot;); background-repeat: no-repeat; background-position: 50% 50%; background-size: cover;"></div>
+                    </div>
+                    <img src="assets/imgs/default_header.png" style="display: none;">
+                </div>
+
+                <div class="user_infor" id="infor">
+                    <p>{{userData.nickName}}</p>
+                    <label id="showstatus">{{authstate}}</label>
+                </div>
+                <i class="iconfont" id="right"></i>
+            </div>
+
+            <!-- <div  style="display: block;">
+                <div class="por">
+                    <div class="jqthumb" style="width: 65px; height: 65px; opacity: 1;">
+                        <div style="width: 100%; height: 100%; border-radius: 50%; background-image: url(&quot;http://www.yuntoub.com:8021/upload/default_header.png&quot;); background-repeat: no-repeat; background-position: 50% 50%; background-size: cover;"></div>
+                    </div>
+                    <img src="assets/imgs/default_header.png" style="display: none;">
+                </div>
+
+                <div class="user_infor">
+                    <p>请登录</p>
+                </div>
+            </div> -->
+
+        </router-link>
+        <ul class="infor_list">
+            <li>
+                <router-link to="/user_assets">
+                    <i class="iconfont icon icon_02"></i>
+                    <label>我的资产</label>
+                    <i class="iconfont"></i>
+                </router-link>
+            </li>
+
+            <li>
+                <router-link to="/user_bankcard">
+                    <i class="iconfont icon icon_03"></i>
+                    <label>我的银行卡</label>
+                    <i class="iconfont"></i>
+                </router-link>
+            </li>
+
+            <li>
+                <router-link to="/user_recharge">
+                    <i class="iconfont icon icon_04"></i>
+                    <label>充值</label>
+                    <i class="iconfont"></i>
+                </router-link>
+            </li>
+
+            <li>
+                <router-link to="/user_withdraw">
+                    <i class="iconfont icon icon_05"></i>
+                    <label>提现</label>
+                    <i class="iconfont"></i>
+                </router-link>
+            </li>
+
+        </ul>
+        <ul class="infor_list">
+            <li>
+                <router-link to="/user_changepwd">
+                    <i class="iconfont icon icon_06"></i>
+                    <label>密码修改</label>
+                    <i class="iconfont"></i>
+                </router-link>
+            </li>
+        </ul>
+        <ul class="infor_list">
+            <li class="about_us">
+                <router-link to="/">
+                    <i class="iconfont icon icon_05"></i>
+                    <label>我的推广</label>
+                    <i class="iconfont"></i>
+                </router-link>
+            </li>
+        </ul>
+        <mt-button type="primary" size="large" @click="logout()">{{$cookie.get('_auth')?'退出登录':'登录'}}</mt-button>
+  </div>
+</template>
+
+<script type="">
+import { Toast,MessageBox } from 'mint-ui';
+
+export default {
+  name:"user",
+  data() {
+    return {
+        userData: {//个人资料
+            // agentId: "17",//代理ID
+            // authStatus: 2,//实名认证状态 0未认证 1认证中 2已认证 3认证失败
+            // autoId: 140325,//??
+            // chnName: "小熊",//姓名
+            // couponMoney: 0,//???
+            // mobile:'15901532857',//手机号
+            // idCard:'32072419911213093x',//身份证号
+            // nickName:'昵称',//昵称
+            // money:'100',//余额
+            // freezeMoney:'',//冻结资金
+            // integral:'',//积分
+            // rechargeMoney:'',//累计充值
+            // outMoney:'',//累计提现
+            // inviteCode:''//邀请码
+        }
+    }
+  },
+  computed: {
+    authstate(){
+        switch(this.userData.authStatus){
+            case 0:
+            return '未实名认证'
+            case 1:
+            return '正在审核'
+            case 2:
+            return '已实名认证'
+            case 3:
+            return '认证失败请重新认证'
+        }
+    }  
+  },
+  created () {
+    this.loading()
+  },
+//     beforeRouteLeave (to, from, next) {//组件内路由守卫
+//     // 导航离开该组件的对应路由时调用
+//     // 可以访问组件实例 `this`
+//         if(to.name=='user_realname'||to.name=='user'||to.name=='index'||to.name=='transact'||to.name=='info'||to.name=='login'){
+//              next()
+//              return
+//         }
+//         if(this.userData.authStatus==2){//如果实名认证
+//             next()
+//         }else{
+//             Toast('请先完成实名认证');
+//         }
+        
+//   },
+  methods: {
+    logout(){//退出登录
+    MessageBox.confirm('确认退出?').then(action => {
+        if(this.$cookie.get('_auth')){
+                this.$cookie.clear()//清除cookie
+                this.$router.push('/login')//跳转登录页
+            }else{
+                this.$router.push('/login')
+            }
+    });        
+       
+    },
+    loading(){//页面加载调用
+        this.$axios.post("/api/user/query_user_info").then(res => {//获取用户信息
+            if(res.data.errorCode==0){
+                this.userData=res.data.data
+            }else{
+                Toast(res.errorMsg)
+            }
+        }).catch(err => {
+        });
+    }  
+  },
+  components: {
+
+  }
+}
+</script>
+
+<style scoped lang="">
+.por {
+    width: 65px;
+    height: 65px;
+    text-align: center;
+    line-height: 65px;
+    border-radius: 100%;
+    overflow: hidden;
+    float: left;
+    background: #fff;
+}
+.por img {
+    width: 100%;
+    /* display: inline; */
+}
+.user_por {
+    width: 100%;
+    padding: 0 2%;
+    margin-bottom: 8px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 80px;
+    padding-top: 7.5px;
+    background: #fff;
+    display: block;
+}
+.user_infor {
+    width: 70%;
+    padding-left: 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 65px;
+    float: left;
+}
+.user_infor p {
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    font-size: 18px;
+    color: #333;
+}
+.user_infor label {
+    font-size: 14px;
+    color: #999;
+    display: block;
+}
+.user_por i {
+    width: 8%;
+    height: 65px;
+    line-height: 65px;
+    text-align: center;
+    font-size: 24px;
+    color: #d2d2d2;
+    float: right;
+    display: block;
+}
+
+.infor_list {
+    margin-bottom: 8px;
+    background: #fff;
+}
+.infor_list li {
+    padding: 0 2%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #eee;
+}
+.infor_list li a {
+    display: block;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.infor_list li i.icon {
+    float: left;
+    font-size: 30px;
+}
+
+.infor_list li i {
+    float: right;
+    font-size: 24px;
+    color: #d2d2d2;
+}
+.infor_list li a label {
+    font-size: 14px;
+    padding-left: 3%;
+    color: #333;
+    display: block;
+    -webkit-box-flex: 5;
+    -webkit-flex: 5;
+    -ms-flex: 5;
+    flex: 5;
+}
+.mint-button{
+    margin-top: 20px;
+    width: 90%;
+    margin: 0 auto;
+}
+.mint-msgbox {/*弹出框样式*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    background-color: #fff;
+    width: 74%;
+    border-radius: 3px;
+    font-size: 16px;
+    -webkit-user-select: none;
+    overflow: hidden;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: .2s;
+    transition: .2s;
+    border-radius: 15px;
+}
+</style>

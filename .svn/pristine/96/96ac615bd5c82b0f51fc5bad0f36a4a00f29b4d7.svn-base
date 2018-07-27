@@ -1,0 +1,101 @@
+<template>
+  <div class="user_main">
+    <mt-header fixed :title="title">
+        <a @click='back' slot="left">
+            <mt-button icon="back"></mt-button>
+        </a>
+    </mt-header>
+    <ul class="infor_list sec_number">
+            <li>
+                <input disabled="" placeholder="请输入手机号" type="number" ng-reflect-is-disabled="disabled" ng-reflect-model="15901532857" class="ng-untouched ng-pristine">
+            </li>
+            <li>
+                <div tappable="" class="">
+                    <input disabled="" placeholder="" type="text" ng-reflect-is-disabled="disabled" ng-reflect-model="中国建设银行" class="ng-untouched ng-pristine">
+                </div>
+            </li>
+            <li>
+                <input placeholder="请输入开户支行" type="text" ng-reflect-model="" class="ng-untouched ng-pristine ng-valid">
+            </li>
+            <li>
+                <input placeholder="请输入开户人姓名" type="text" ng-reflect-model="" class="ng-untouched ng-pristine ng-valid">
+            </li>
+            <li>
+                <input placeholder="请输入银行卡号" type="text" ng-reflect-model="" class="ng-untouched ng-pristine ng-valid">
+            </li>
+
+            <li>
+                <button class="confirm" tappable="">确认</button>
+            </li>
+        </ul>
+  </div>
+</template>
+
+<script type="">
+export default {
+  name:"add_bankcard",
+  data() {
+    return {
+        title:'添加银行卡'
+    }   
+  },
+  components: {
+
+  }
+}
+</script>
+
+<style scoped lang="">
+.sec_number {
+    border-top: 1px solid #EEEEEE;
+    margin-top: 8px;
+    padding-top: 15px;
+}
+
+.infor_list {
+    margin-bottom: 8px;
+    background: #FFFFFF;
+    display: block;
+}
+.sec_number li {
+    height: 58px;
+    border-bottom: none;
+}
+
+.infor_list li {
+    padding: 0 2%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid #eeeeee;
+    display: block;
+}
+
+.sec_number li input {
+    width: 96%;
+    margin: 0 auto;
+    display: block;
+    height: 46px;
+    padding: 0 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.infor_list li input {
+    border: 1px solid #eee !important;
+    border-radius: 6px;
+} 
+.sec_number li .confirm {
+    width: 96%;
+    margin: 0 auto;
+    display: block;
+    height: 46px;
+    border-radius: 4px;
+    background: #00baff;
+    color: #FFFFFF;
+    font-size: 14px;
+    border: none;
+}
+</style>

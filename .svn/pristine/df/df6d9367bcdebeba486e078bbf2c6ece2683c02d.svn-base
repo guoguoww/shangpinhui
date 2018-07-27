@@ -1,0 +1,51 @@
+<template>
+  <div class="">
+    <mt-header fixed :title="title">
+        <a @click='back' slot="left">
+            <mt-button icon="back"></mt-button>
+        </a>
+    </mt-header>
+  </div>
+</template>
+
+<script type="">
+export default {
+  name:"info_details",
+  data() {
+    return {
+        title:'新闻标题'
+    }
+  },
+  components: {
+
+  },
+  watch: {
+      
+  },
+  mounted () {
+      this.loading()
+  },
+  methods: {
+    loading(){
+        this.$axios({
+            url:'/api/home/news/ﬁndByIdNews',
+            method:'post',
+            data:{
+                id:this.$route.query.id
+            }
+        }).then(res=>{
+
+        }).catch(err=>{
+            
+        })
+    }    
+  }
+}
+</script>
+
+<style scoped lang="">
+.mint-header{
+    background-color: #ffffff;
+    color: #555;
+}
+</style>

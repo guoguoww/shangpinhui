@@ -1,0 +1,331 @@
+<template>
+  <div id="myChart"  style="height:260px">
+
+  </div>
+</template>
+
+<script>
+import * as echarts from "echarts";
+export default {
+     props: ["interval",'code'],
+    name: "echarts",
+    data: function() {
+        return {
+            myChart: null,
+            fsdata:["2018-07-05 10:58~10:58,496.3,496.3,496.3,496.4", "2018-07-05 10:57~10:57,496.3,496.3,496.3,496.4", "2018-07-05 10:56~10:56,496.4,496.4,496.4,496.4", "2018-07-05 10:55~10:55,496.3,496.4,496.3,496.5", "2018-07-05 10:54~10:54,496.3,496.3,496.3,496.3", "2018-07-05 10:53~10:53,496.3,496.3,496.3,496.4", "2018-07-05 10:52~10:52,496.4,496.3,496.3,496.4", "2018-07-05 10:51~10:51,496.4,496.4,496.4,496.5", "2018-07-05 10:50~10:50,496.5,496.4,496.4,496.5", "2018-07-05 10:49~10:49,496.5,496.5,496.5,496.5", "2018-07-05 10:48~10:48,496.4,496.5,496.4,496.5", "2018-07-05 10:47~10:47,496.3,496.4,496.3,496.4", "2018-07-05 10:46~10:46,496.3,496.3,496.3,496.4", "2018-07-05 10:45~10:45,496.6,496.3,496.3,496.6", "2018-07-05 10:44~10:44,496.6,496.5,496.5,496.6", "2018-07-05 10:43~10:43,496.5,496.6,496.5,496.6", "2018-07-05 10:42~10:42,496.4,496.5,496.4,496.6", "2018-07-05 10:41~10:41,496.5,496.4,496.4,496.5", "2018-07-05 10:40~10:40,496.5,496.5,496.4,496.6", "2018-07-05 10:39~10:39,496.4,496.5,496.4,496.5", "2018-07-05 10:38~10:38,496.4,496.4,496.4,496.4", "2018-07-05 10:37~10:37,496.6,496.4,496.4,496.7", "2018-07-05 10:36~10:36,496.6,496.6,496.5,496.7", "2018-07-05 10:35~10:35,496.6,496.6,496.5,496.7", "2018-07-05 10:34~10:34,496.5,496.6,496.5,496.7", "2018-07-05 10:33~10:33,496.5,496.4,496.4,496.5", "2018-07-05 10:32~10:32,496.4,496.5,496.4,496.5", "2018-07-05 10:31~10:31,496.5,496.4,496.4,496.6", "2018-07-05 10:30~10:30,496.4,496.5,496.3,496.5", "2018-07-05 10:15~10:15,496.4,496.4,496.4,496.4", "2018-07-05 10:14~10:14,496.3,496.4,496.3,496.5", "2018-07-05 10:13~10:13,496.3,496.3,496.3,496.4", "2018-07-05 10:12~10:12,496.2,496.3,496.1,496.4", "2018-07-05 10:11~10:11,496.3,496.2,496.1,496.3", "2018-07-05 10:10~10:10,496.1,496.3,496.1,496.3", "2018-07-05 10:09~10:09,496.2,496.2,496.1,496.2", "2018-07-05 10:08~10:08,496.2,496.2,496.1,496.2", "2018-07-05 10:07~10:07,496.2,496.3,496.1,496.3", "2018-07-05 10:06~10:06,496.2,496.2,496.1,496.3", "2018-07-05 10:05~10:05,496.3,496.2,496.2,496.3", "2018-07-05 10:04~10:04,496.3,496.3,496.2,496.3", "2018-07-05 10:03~10:03,496.1,496.4,496.1,496.4", "2018-07-05 10:02~10:02,496.3,496.2,496.2,496.4", "2018-07-05 10:01~10:01,495.9,496.3,495.9,496.4", "2018-07-05 10:00~10:00,495.9,495.9,495.8,496.0", "2018-07-05 09:59~09:59,495.7,496.0,495.5,496.1", "2018-07-05 09:58~09:58,496.3,495.7,495.7,496.3", "2018-07-05 09:57~09:57,496.4,496.2,496.2,496.4", "2018-07-05 09:56~09:56,496.3,496.4,496.2,496.4", "2018-07-05 09:55~09:55,496.4,496.3,496.1,496.4", "2018-07-05 09:54~09:54,496.6,496.5,496.3,496.6", "2018-07-05 09:53~09:53,496.7,496.5,496.5,496.7", "2018-07-05 09:52~09:52,496.5,496.7,496.5,496.7", "2018-07-05 09:51~09:51,496.5,496.5,496.4,496.7", "2018-07-05 09:50~09:50,496.6,496.5,496.5,496.6", "2018-07-05 09:49~09:49,496.6,496.6,496.5,496.7", "2018-07-05 09:48~09:48,496.6,496.6,496.6,496.7", "2018-07-05 09:47~09:47,496.6,496.7,496.6,496.7", "2018-07-05 09:46~09:46,496.9,496.6,496.6,496.9", "2018-07-05 09:45~09:45,497.0,496.9,496.8,497.0", "2018-07-05 09:44~09:44,496.8,496.9,496.8,496.9", "2018-07-05 09:43~09:43,496.9,496.8,496.8,497.0", "2018-07-05 09:42~09:42,497.0,496.9,496.7,497.0", "2018-07-05 09:41~09:41,496.9,497.0,496.9,497.0", "2018-07-05 09:40~09:40,496.8,496.8,496.8,496.9", "2018-07-05 09:39~09:39,496.9,496.7,496.7,497.0", "2018-07-05 09:38~09:38,496.8,496.9,496.7,497.0", "2018-07-05 09:37~09:37,497.2,496.8,496.7,497.2", "2018-07-05 09:36~09:36,497.1,497.1,497.1,497.6", "2018-07-05 09:35~09:35,496.6,497.1,496.6,497.3", "2018-07-05 09:34~09:34,496.8,496.6,496.6,496.8", "2018-07-05 09:33~09:33,496.6,496.8,496.6,496.8", "2018-07-05 09:32~09:32,496.6,496.7,496.5,496.7", "2018-07-05 09:31~09:31,496.7,496.5,496.4,496.7", "2018-07-05 09:30~09:30,496.5,496.7,496.5,496.8", "2018-07-05 09:29~09:29,496.6,496.6,496.6,496.9", "2018-07-05 09:28~09:28,496.6,496.6,496.4,496.6", "2018-07-05 09:27~09:27,496.5,496.6,496.4,496.6", "2018-07-05 09:26~09:26,496.4,496.5,496.4,496.6", "2018-07-05 09:25~09:25,496.6,496.4,496.4,496.6", "2018-07-05 09:24~09:24,496.5,496.5,496.5,496.8", "2018-07-05 09:23~09:23,496.4,496.5,496.4,496.5", "2018-07-05 09:22~09:22,496.1,496.4,496.1,496.6", "2018-07-05 09:21~09:21,496.3,496.1,496.0,496.4", "2018-07-05 09:20~09:20,496.5,496.3,496.2,496.6", "2018-07-05 09:19~09:19,496.6,496.5,496.5,496.6", "2018-07-05 09:18~09:18,496.4,496.6,496.4,496.6", "2018-07-05 09:17~09:17,496.4,496.4,496.4,496.5", "2018-07-05 09:16~09:16,496.5,496.4,496.4,496.6", "2018-07-05 09:15~09:15,496.6,496.5,496.4,496.6", "2018-07-05 09:14~09:14,496.7,496.6,496.4,496.7", "2018-07-05 09:13~09:13,496.7,496.7,496.5,496.7", "2018-07-05 09:12~09:12,496.6,496.7,496.6,496.8", "2018-07-05 09:11~09:11,496.6,496.6,496.5,496.6", "2018-07-05 09:10~09:10,496.5,496.5,496.4,496.6", "2018-07-05 09:09~09:09,496.6,496.6,496.5,496.7", "2018-07-05 09:08~09:08,496.5,496.6,496.5,496.7", "2018-07-05 09:07~09:07,496.4,496.5,496.4,496.7", "2018-07-05 09:06~09:06,496.1,496.4,495.9,496.5", "2018-07-05 09:05~09:05,496.5,496.2,496.2,496.5"],
+            kdate:[],//k线时间
+            kvalues:[],//k线value
+            fsdate:[],//分时线时间
+            fsvalue:[]//分时线值
+        };
+    },
+    mounted: function() {
+        // var myChart = echarts.init(document.getElementById('myChart'));
+        // myChart.setOption(this.klineoptions);
+        // this.myChart = myChart;
+        this.getkline()
+    },
+    watch: {
+        code(val){
+            console.log(val,this.code)
+            this.getkline()
+        },
+        interval(val){
+            console.log(val,this.code)
+            this.getkline()
+        }
+    },
+    computed: {
+
+      fsoptions(){//分时线options
+       return {
+            tooltip: {
+                trigger: "axis"
+                // axisPointer: {
+                // type: 'cross'
+                // }
+            },
+            grid: {
+                top: "5%",
+                left: "13%",
+                right: "3%",
+                bottom: "10%"
+            },
+            xAxis: {
+                // show:false,
+                type: "category",
+                boundaryGap: false,
+                data: this.fsdate,
+                axisLabel: {
+                    textStyle: {
+                        fontFamily: "verdana",
+                        fontSize: 9,
+                        fontStyle: "normal"
+                    }
+                }
+            },
+            yAxis: {
+                type: "value",
+                scale: true,
+                axisLabel: {
+                    textStyle: {
+                        fontFamily: "verdana",
+                        fontSize: 9,
+                        fontStyle: "normal"
+                    }
+                }
+            },
+            animation: false,
+            series: [
+                {
+                    name: "新价",
+                    data: this.fsvalue,
+                    type: "line",
+                    symbol: "none",
+                    color: "#23C3FF",
+                    areaStyle: {
+                        normal: {
+                            color: "#CDF2FF"
+                        }
+                    },
+                    lineStyle: {
+                        width: 1
+                    }
+                }
+            ]
+        };
+      },
+      klineoptions(){//k线options
+        return {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
+                },
+                formatter: function (params) {
+                    var res = params[0].seriesName + ' ' + params[0].name;
+                    res += '<br/> 开盘 : ' + params[0].value[1] + ' 最高 : ' +
+                        params[0].value[4];
+                    res += '<br/> 收盘 : ' + params[0].value[2] + ' 最低 : ' +
+                        params[0].value[3];
+                    return res;
+                },
+            },
+            grid: {
+                top: '5%',
+                left: '13%',
+                right: '3%',
+                bottom: '15%'
+            },
+            xAxis: {
+                type: 'category',
+                data: this.kdate,
+                scale: true,
+                boundaryGap: false,
+                axisLine: {
+                    onZero: false
+                },
+                splitLine: {
+                    show: false
+                },
+                splitNumber: 20,
+                min: 'dataMin',
+                max: 'dataMax',
+                axisLabel: {
+                    textStyle: {
+                        fontFamily: 'verdana',
+                        fontSize: 9,
+                        fontStyle: 'normal',
+                    },
+                    formatter: function (value, index) {
+                      return value.substring(6, 11);
+                        // if (bizType == 1500) {
+                        //     return value.substring(0, 6);
+                        // } else {
+                        //     return value.substring(6, 11);
+                        // }
+                    }
+                }
+            },
+            yAxis: {
+                scale: true,
+                axisLabel: {
+                    textStyle: {
+                        fontFamily: 'verdana',
+                        fontSize: 9,
+                        fontStyle: 'normal',
+                    }
+                }
+            },
+            dataZoom: [{
+                    type: 'inside',
+                    // start: 50,
+                    start: 0,
+                    end: 100
+                },
+                {
+                    show: true,
+                    type: 'slider',
+                    y: '90%',
+                    start: 50,
+                    end: 100
+                }
+            ],
+            animation: false,
+            series: [{
+                    name: 'K线',
+                    type: 'candlestick',
+                    data: this.kvalues,
+                    itemStyle: {
+                        normal: {
+                            color: '#ec0000',
+                            color0: '#8A0000',
+                            borderColor: '#00da3c',
+                            borderColor0: '#008F28'
+                        }
+                    },
+                },
+                {
+                    name: 'MA5',
+                    type: 'line',
+                    data: this.calculateMA(this.kvalues, 5),
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            // opacity: 0.5,
+                            width: 1
+                        }
+                    }
+                },
+                {
+                    name: 'MA10',
+                    type: 'line',
+                    data: this.calculateMA(this.kvalues, 10),
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    }
+                },
+                {
+                    name: 'MA20',
+                    type: 'line',
+                    data: this.calculateMA(this.kvalues, 20),
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    }
+                },
+                {
+                    name: 'MA30',
+                    type: 'line',
+                    data: this.calculateMA(this.kvalues, 30),
+                    smooth: true,
+                    showSymbol: false,
+                    lineStyle: {
+                        normal: {
+                            width: 1
+                        }
+                    }
+                },
+            ]
+        }
+      }
+    },
+    methods: {
+        getkline(){//获取k线图数据
+            this.$axios({
+                url:'/api/market/kline_data',
+                method:'post',
+                headers:{
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                data:{
+                    code:this.code,
+                    interval:this.interval,
+                    rows:'50'
+                }
+            }).then(res=>{
+                if (res.data.errorCode==0) {
+                    if (this.interval==1) {//如果是分时线
+                        //this.myChart.clear()
+                        this.fsdate=[]
+                        this.fsvalue=[]
+                        this.splitdata(res.data.data)
+                        var myChart = echarts.init(document.getElementById('myChart'));
+                        myChart.clear()
+                        myChart.setOption(this.fsoptions);
+                        this.myChart = myChart;
+                    }else{
+                        //this.myChart.clear()
+                        console.log(res.data.data)
+                        this.kdate=[]
+                        this.kvalues=[]
+                        this.splitkdata(res.data.data)
+                        console.log(this.kvalues)
+                        var myChart = echarts.init(document.getElementById('myChart'));
+                        myChart.clear()
+                        myChart.setOption(this.klineoptions);
+                        this.myChart = myChart;
+                    }
+                }
+            }).catch(err=>{
+
+            })
+        },
+        splitdata(fsdata){//分割分时线数据
+            for (var i = 0; i < fsdata.length; i++) {
+                this.fsdate.push(fsdata[i].time.split(' ')[1]);
+                this.fsvalue.push(fsdata[i].close); // 收盘
+            }
+        },
+        splitkdata(klinedata){//分割k线数据
+            for (var i = 0; i < klinedata.length; i++) {
+                this.kdate.push(klinedata[i].time);
+                var arr=[]
+                arr.push(klinedata[i].close,klinedata[i].open,klinedata[i].high,klinedata[i].low)
+                this.kvalues.push(arr)
+            }
+            console.log(this.kvalues)
+        },
+        update(data) {//更新
+            this.myChart.setOption({
+                series: [
+                    {
+                        data: data
+                    }
+                ]
+            });
+        },
+        
+        clear() {//清空
+            this.myChart.clear();
+        },
+        calculateMA(valueData, dayCount) {
+        var result = [];
+        for (var i = 0, len = valueData.length; i < len; i++) {
+            if (i < dayCount) {
+                result.push('-');
+                continue;
+            }
+            var sum = 0;
+            for (var j = 0; j < dayCount; j++) {
+                sum += Number(valueData[i - j][1]);
+            }
+            result.push(sum / dayCount);
+        }
+        console.log(valueData)
+        return result;
+    }
+    }
+};
+</script>
+
+<style rel="stylesheet/scss" scoped>
+</style>

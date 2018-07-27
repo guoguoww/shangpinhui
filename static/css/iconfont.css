@@ -1,0 +1,91 @@
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1492758122333'); /* IE9*/
+  src: url('iconfont.eot?t=1492758122333#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1492758122333') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1492758122333') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1492758122333#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"syr" ,"iconfont" !important;
+  font-size:16px; 
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tupian:before { content: "\e600"; }
+
+.icon-star:before { content: "\e641"; }
+
+.icon-gonggao:before { content: "\e698"; }
+
+.icon-mima:before { content: "\e623"; }
+
+.icon-pinglun:before { content: "\e612"; }
+
+.icon-shangchuanshenfenzhengzheng:before { content: "\e60f"; }
+
+.icon-shangchuanshenfenzhengfan:before { content: "\e610"; }
+
+.icon-shouji:before { content: "\e611"; }
+
+.icon-home:before { content: "\e614"; }
+
+.icon-icphotocamerawhite24px:before { content: "\e63a"; }
+
+.icon-gonggao1:before { content: "\e6ad"; }
+
+.icon-anquan:before { content: "\e609"; }
+
+.icon-wode:before { content: "\e604"; }
+
+.icon-xiangshangjiantou:before { content: "\e60d"; }
+
+.icon-xiangxiajiantou:before { content: "\e617"; }
+
+.icon-xiangyoujiantou:before { content: "\e618"; }
+
+.icon-xiangzuojiantou:before { content: "\e619"; }
+
+.icon-shouyexingqing:before { content: "\e601"; }
+
+.icon-shebei:before { content: "\e644"; }
+
+.icon-guanyuwomen:before { content: "\e605"; }
+
+.icon-jiantou-copy:before { content: "\e628"; }
+
+.icon-gou1:before { content: "\e73d"; }
+
+.icon-cuoyuan1:before { content: "\e723"; }
+
+.icon-weibiaoti1fuzhi02:before { content: "\e61e"; }
+
+.icon-zixun:before { content: "\e606"; }
+
+.icon-36x36guanbi:before { content: "\e61a"; }
+
+.icon-mima1:before { content: "\e659"; }
+
+.icon-guanji2:before { content: "\e67e"; }
+
+.icon-tuisong:before { content: "\e648"; }
+
+.icon-guanzhu:before { content: "\e607"; }
+
+.icon-yly_shangzhang:before { content: "\e61b"; }
+
+.icon-youhuiquan:before { content: "\e63c"; }
+
+.icon-lingdang:before { content: "\e60b"; }
+
+.icon-up:before { content: "\e603"; }
+
+.icon-shimingrenzheng:before { content: "\e673"; }
+
+.icon-kejian:before { content: "\e647"; }
+
+.icon-jiantou-copy-copy:before { content: "\e73e"; }
+

@@ -1,0 +1,188 @@
+<template>
+  <div class="user_main">
+    <mt-header fixed :title="title">
+        <a @click='back' slot="left">
+            <mt-button icon="back"></mt-button>
+        </a>
+    </mt-header>
+
+    <div class="assets_layout" id="assets">
+        <ul class="assets_a">
+            <li><span>人民币资产</span><label id="zongzichang">{{userData.money}}元</label></li>
+            <li><span>可用资金</span><label id="ktx">{{userData.money-userData.freezeMoney}}元</label></li>
+        </ul>
+        <ul class="assets_a">
+            <li><span>可取资金</span><label>{{userData.money-userData.freezeMoney}}元</label></li>
+            <li><span>冻结资金</span><label id="chicangTotal" style="color:#00baff">{{userData.freezeMoney}}元</label></li>
+        </ul>
+    </div>
+
+    <mt-cell title="充值提现明细"  is-link to="/recharge_details" class="recharge_details">
+        <i slot="icon" class="iconfont icon icon_05" width="24" height="24"></i> 
+    </mt-cell>
+
+    <div class="btn_group">
+        <router-link to="/user_recharge">充值</router-link>
+        <router-link to="/user_withdraw">提现</router-link>
+    </div>
+  </div>
+</template>
+
+<script type="">
+export default {
+  name:"",
+  data() {
+    return {
+        title:'我的资产',
+        userData: {//个人资料
+            // agentId: "17",//代理ID
+            // authStatus: 0,//实名认证状态 0未认证 1认证中 2已认证 3认证失败
+            // autoId: 140325,//??
+            // chnName: "小熊",//姓名
+            // couponMoney: 0,//???
+            // mobile:'15901532857',//手机号
+            // idCard:'32072419911213093x',//身份证号
+            // nickName:'昵称',//昵称
+            // money:'100',//余额
+            // freezeMoney:'0',//冻结资金
+            // integral:'',//积分
+            // rechargeMoney:'',//累计充值
+            // outMoney:'',//累计提现
+            // inviteCode:''//邀请码
+        }
+    }
+  },
+  components: {
+
+  },
+  created () {
+      this.loading()
+  },
+  methods: {
+      loading(){
+        this.$axios.post("/api/user/query_user_info").then(res => {//获取用户信息
+            if(res.data.errorCode==0){
+                this.userData=res.data.data
+            }else{
+                
+            }
+        }).catch(err => {
+
+        });
+      }
+  }
+}
+</script>
+
+<style scoped lang="">
+ .assets_layout {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #eee;
+    border-left: none;
+    border-right: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 0 2%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+ .assets_layout ul {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 15px 0;
+    position: relative;
+}
+ .assets_layout ul:first-child:before {
+    content: '';
+    width: 1px;
+    height: 70%;
+    position: absolute;
+    top: 15%;
+    right: 0;
+    background: #eee;
+}
+ .assets_layout ul li {
+    padding: 0 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+ .assets_layout ul li span {
+    display: block;
+    padding: 8px 0;
+    color: #333;
+    font-size: 14px;
+}
+ .assets_layout ul li b,  .assets_layout ul li label {
+    color: #00baff;
+    font-weight: 400;
+    padding-left: 5px;
+    font-size: 16px;
+    display: block;
+}
+.mint-cell{
+    margin-top: 1rem;
+}
+.mint-cell .iconfont{
+    font-size: 3rem;
+    color: #00baff;    
+}
+
+.btn_group {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.btn_group a, .btn_group button {
+    width: 50%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    border: none;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    background: #00baff;
+    font-size: 14px;
+    display: inline-block;
+    position: relative;
+}
+.btn_group a:first-child::before, .btn_group button:first-child::before {
+    content: '';
+    width: 1px;
+    height: 60%;
+    background: #fff;
+    position: absolute;
+    top: 20%;
+    right: 0;
+}
+.btn_group a, .btn_group button {
+    width: 50%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    border: none;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    background: #00baff;
+    font-size: 14px;
+    display: inline-block;
+    position: relative;
+}
+
+</style>

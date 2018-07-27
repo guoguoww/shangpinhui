@@ -1,0 +1,169 @@
+<template>
+  <div class="user_main">
+    <mt-header fixed :title="title">
+        <a @click='back' slot="left">
+            <mt-button icon="back"></mt-button>
+        </a>
+    </mt-header>
+    <ul class="infor_list sec_number">
+        <li>
+            <input id="phoneNumber" placeholder="请输入手机号" type="text" v-model='userData.mobile'>
+        </li>
+
+        <li class="forget_txt">
+            <input id="yzm" placeholder="验证码" type="text" v-model='userData.validCode'>
+            <button class="forget_yzm"  @click="getCode()" :disabled='disabled' :class="{disabled:disabled}">
+                {{isNaN(codetext)?codetext:codetext+'秒'}}
+            </button>
+        </li>
+
+        <li>
+            <input id="pwd" placeholder="新密码" type="password" v-model='userData.password'>
+        </li>
+
+        <li style="margin-top: 15px" >
+            <button class="confirm" @click='forget()'>确认</button>
+        </li>
+    </ul>
+  </div>
+</template>
+
+<script type="">
+import { Toast } from 'mint-ui';
+
+export default {
+  name:"",
+  data() {
+    return {
+        title:'忘记密码',
+        userData:{//用户资料
+            mobile:'',//手机
+            password:'',
+            validCode:''//验证码
+        },
+        disabled:false, //验证码按钮状态
+        timer:null,//验证码定时器
+        codetext:'获取验证码'//验证码文字信息
+    }
+  },
+  components: {
+
+  },
+  methods:{
+      getCode(){//获取短信验证码
+      if (!this.userData.mobile) {
+          Toast('请输入手机号码')
+          return
+      }
+            this.disabled=true
+            this.codetext=60
+            this.timer=setInterval(()=>{
+                if(this.codetext > 0 && this.codetext <= 60 > 0 && this.codetext <= 60){
+                    this.codetext--
+                }else{
+                    this.disabled=false
+                    this.codetext='获取验证码'
+                    clearInterval(this.timer)
+                    this.timer=null
+                }
+            },1000)
+          this.$axios.get('/api/sms/validate_code/mtpwd_'+this.userData.mobile).then(res=>{
+              if (res.data.errorCode==0) {
+                  Toast('发送成功')
+              }else{
+                  Toast(res.data.errorMsg)
+              }
+          }).catch(err=>{
+
+          })
+      },
+      forget(){//重置密码
+        this.$axios({
+            url:'/api/user/forget_password',
+            method:'post',
+            params:this.userData
+        }).then(res=>{
+        if (res.data.errorCode==0) {
+                  Toast('重置成功')
+                  this.$router.push('/login')
+              }else{
+                  Toast(res.data.errorMsg)
+              }
+        }).catch(err=>{
+
+        })
+      }
+  }
+}
+</script>
+
+<style scoped lang="">
+.sec_number {
+    border-top: 1px solid #eee;
+    margin-top: 8px;
+    padding-top: 15px;
+}
+
+.infor_list {
+    margin-bottom: 8px;
+    background: #fff;
+    display: block;
+}
+.sec_number li {
+    height: 58px;
+    border-bottom: none;
+}
+.infor_list li {
+    padding: 0 2%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 50px;
+    line-height: 50px;
+    /* border-bottom: 1px solid #eee; */
+    display: block;
+}
+.sec_number li input {
+    width: 96%;
+    margin: 0 auto;
+    display: block;
+    height: 46px;
+    padding: 0 3%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+.infor_list li input {
+    border: 1px solid #eee!important;
+    border-radius: 6px;
+}
+.forget_txt {
+    position: relative;
+}
+.forget_yzm {
+    height: 30px;
+    background: #00baff;
+    border: none;
+    border-radius: 5px;
+    padding: 0 5px;
+    color: #fff;
+    position: absolute;
+    right: 7%;
+    top: 8px;
+    line-height: 30px
+}
+.disabled{/*获取验证码按钮禁用后颜色*/
+    background: #ccc;
+}
+.sec_number li .confirm {
+    width: 96%;
+    margin: 0 auto;
+    display: block;
+    height: 46px;
+    border-radius: 4px;
+    background: #00baff;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+}
+</style>

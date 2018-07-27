@@ -1,0 +1,104 @@
+<template>
+  <div class="user_main">
+    <mt-header fixed :title="title">
+        <a @click='back' slot="left">
+            <mt-button icon="back"></mt-button>
+        </a>
+    </mt-header>
+
+        <mt-cell title="姓名" :value="userData.chnName"></mt-cell>
+        <mt-cell title="余额" :value="userData.money"></mt-cell>
+        <!-- <mt-cell title="银行卡" :value="userData."></mt-cell>
+        <mt-cell title="银行卡号" :value="userData."></mt-cell> -->
+        <mt-field label="银行卡" placeholder="请选择银行卡" type="number" ></mt-field>
+        <mt-field label="银行卡号" placeholder="请输入银行卡号" type="number" ></mt-field>
+        <mt-field label="提现金额" placeholder="请输入金额" type="number" >&nbsp; 元</mt-field>
+        <p class="forget">备注：单笔提现收百分之一手续费</p>
+        <button class="my_comment" tappable="">确定</button>
+  </div>
+</template>
+
+<script type="">
+export default {
+  name:"user_withdraw",
+  data() {
+    return {
+        title:'提现',
+        userData: {//个人资料
+            agentId: "17",//代理ID
+            authStatus: 0,//实名认证状态 0未认证 1认证中 2已认证 3认证失败
+            autoId: 140325,//??
+            chnName: "小熊",//姓名
+            couponMoney: 0,//???
+            mobile:'15901532857',//手机号
+            idCard:'32072419911213093x',//身份证号
+            nickName:'昵称',//昵称
+            money:'100',//余额
+            freezeMoney:'0',//冻结资金
+            integral:'',//积分
+            rechargeMoney:'',//累计充值
+            outMoney:'',//累计提现
+            inviteCode:''//邀请码
+        },
+
+    }
+  },
+  components: {
+
+  },
+    created () {
+      this.loading()
+  },
+  mounted () {
+      for (let i = 0; i < document.querySelectorAll('.mint-field-core').length; i++) {
+           document.querySelectorAll('.mint-field-core')[i].style.textAlign='right'
+      }
+     
+  },
+  methods: {
+      loading(){
+        this.$axios.post("/api/user/query_user_info").then(res => {//获取用户信息
+            if(res.data.errorCode==0){
+                this.userData=res.data.data
+            }
+        }).catch(err => {
+
+        });
+      }
+  }
+}
+</script>
+
+<style scoped lang="">
+
+.forget {
+    height: 40px;
+    line-height: 40px;
+    color: #5d656b;
+    padding-left: 3%;
+    display: block;
+    float: left;
+    font-size: 13px;
+}
+ .my_comment {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    background: #00baff;
+    color: #fff;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    border: none;
+}
+.mint-cell{
+    color: #888;
+}
+</style>
